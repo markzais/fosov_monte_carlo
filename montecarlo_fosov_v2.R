@@ -21,8 +21,10 @@ size <- 1
 generate_vehicle_demand <- function(seed) {
 
   seed=seed  # set a random seed for reproducibility
-  # scenario <- sample(c(1, 2, 3), 1, prob = rep(1/3, 3))
-  scenario <- sample(c(1, 2, 3), 1, prob = c(.25,.25,.5))
+  # Use this sample for equal likelihood of each scenario
+  scenario <- sample(c(1, 2, 3), 1, prob = rep(1/3, 3))
+  # Use this sample to adjust scenario probabilities for sensitivity analysis
+  # scenario <- sample(c(1, 2, 3), 1, prob = c(.25,.25,.5))
   x11 <- round(rtri(1, min = 918, max = 1439, mode = 1341))
   x12 <- round(rtri(1, min = 1094, max = 1680, mode = 1545))
   x13 <- round(rtri(1, min = 1190, max = 1734, mode = 1645))
