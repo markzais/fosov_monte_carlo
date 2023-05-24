@@ -24,6 +24,7 @@ generate_vehicle_demand <- function(seed) {
   # Use this sample to adjust scenario probabilities for sensitivity analysis
   # scenario <- sample(c(1, 2, 3), 1, prob = c(.25,.25,.5))
   
+  # Probability distributions for Unit i and Vehicle j
   # rtriangle(n, min, max, mode)
   u1v2 <- round(rtriangle(1, 3, 5, 4))
   u2v2 <- round(rtriangle(1, 3, 3, 3))
@@ -32,14 +33,69 @@ generate_vehicle_demand <- function(seed) {
   u5v2 <- round(rtriangle(1, 2, 3, 2))
   u6v2 <- round(rtriangle(1, 1, 2, 1))
   u7v2 <- round(rtriangle(1, 1, 2, 1))
-  u8v2 <- round(rtriangle(1, 13, 15, 13))
+  u8v2 <- round(rtriangle(1, 10, 15, 13))
   u9v2 <- round(rtriangle(1, 2, 3, 2))
   u10v2 <- round(rtriangle(1, 2, 3, 2))
   u11v2 <- round(rtriangle(1, 7, 10, 7))
   u12v2 <- round(rtriangle(1, 2, 3, 2))
   u13v2 <- round(rtriangle(1, 1, 2, 1))
   
-  #Test commit
+  u1v3 <- round(rtriangle(1, 0, 2, 1))
+  u2v3 <- round(rtriangle(1, 0, 0, 0))
+  u3v3 <- round(rtriangle(1, 0, 0, 0))
+  u4v3 <- round(rtriangle(1, 0, 0, 0))
+  u5v3 <- round(rtriangle(1, 1, 2, 1))
+  u6v3 <- round(rtriangle(1, 0, 1, 1))
+  u7v3 <- round(rtriangle(1, 0, 1, 1))
+  u8v3 <- round(rtriangle(1, 5, 10, 7))
+  u9v3 <- round(rtriangle(1, 0, 2, 1))
+  u10v3 <- round(rtriangle(1, 0, 2, 1))
+  u11v3 <- round(rtriangle(1, 2, 4, 3))
+  u12v3 <- round(rtriangle(1, 0, 2, 1))
+  u13v3 <- round(rtriangle(1, 0, 0, 0))
+  
+  u1v4 <- round(rtriangle(1, 1, 2, 2))
+  u2v4 <- round(rtriangle(1, 0, 0, 0))
+  u3v4 <- round(rtriangle(1, 0, 0, 0))
+  u4v4 <- round(rtriangle(1, 0, 0, 0))
+  u5v4 <- round(rtriangle(1, 1, 2, 1))
+  u6v4 <- round(rtriangle(1, 0, 1, 1))
+  u7v4 <- round(rtriangle(1, 0, 1, 1))
+  u8v4 <- round(rtriangle(1, 5, 10, 7))
+  u9v4 <- round(rtriangle(1, 0, 2, 1))
+  u10v4 <- round(rtriangle(1, 0, 2, 1))
+  u11v4 <- round(rtriangle(1, 2, 4, 3))
+  u12v4 <- round(rtriangle(1, 0, 2, 1))
+  u13v4 <- round(rtriangle(1, 1, 1, 1))
+  
+  u1v5 <- round(rtriangle(1, 0, 0, 0))
+  u2v5 <- round(rtriangle(1, 0, 2, 1))
+  u3v5 <- round(rtriangle(1, 0, 0, 0))
+  u4v5 <- round(rtriangle(1, 0, 0, 0))
+  u5v5 <- round(rtriangle(1, 1, 3, 2))
+  u6v5 <- round(rtriangle(1, 0, 2, 1))
+  u7v5 <- round(rtriangle(1, 0, 2, 1))
+  u8v5 <- round(rtriangle(1, 10, 15, 12))
+  u9v5 <- round(rtriangle(1, 1, 3, 2))
+  u10v5 <- round(rtriangle(1, 1, 3, 2))
+  u11v5 <- round(rtriangle(1, 5, 10, 7))
+  u12v5 <- round(rtriangle(1, 2, 3, 2))
+  u13v5 <- round(rtriangle(1, 0, 2, 1))
+  
+  u1v6 <- round(rtriangle(1, 0, 2, 1))
+  u2v6 <- round(rtriangle(1, 0, 0, 0))
+  u3v6 <- round(rtriangle(1, 0, 0, 0))
+  u4v6 <- round(rtriangle(1, 0, 2, 1))
+  u5v6 <- round(rtriangle(1, 1, 3, 2))
+  u6v6 <- round(rtriangle(1, 0, 1, 1))
+  u7v6 <- round(rtriangle(1, 0, 1, 1))
+  u8v6 <- round(rtriangle(1, 5, 10, 8))
+  u9v6 <- round(rtriangle(1, 0, 2, 1))
+  u10v6 <- round(rtriangle(1, 0, 2, 1))
+  u11v6 <- round(rtriangle(1, 2, 4, 3))
+  u12v6 <- round(rtriangle(1, 1, 2, 1))
+  u13v6 <- round(rtriangle(1, 0, 1, 1))
+  
   if (scenario == 1) {
     u1 <- 75
     u2 <- 14
@@ -57,19 +113,83 @@ generate_vehicle_demand <- function(seed) {
     
     demand_v2 <- u1*u1v2 + u2*u2v2 + u3*u3v2 + u4*u4v2 + u5*u5v2 + u6*u6v2 +
       u7*u7v2 + u8*u8v2 + u9*u9v2 + u10*u10v2 + u11*u11v2 + u12*u12v2 + u13*u13v2
+    
     demand_v3 <- u1*u1v3 + u2*u2v3 + u3*u3v3 + u4*u4v3 + u5*u5v3 + u6*u6v3 +
       u7*u7v3 + u8*u8v3 + u9*u9v3 + u10*u10v3 + u11*u11v3 + u12*u12v3 + u13*u13v3
+    
+    demand_v4 <- u1*u1v4 + u2*u2v4 + u3*u3v4 + u4*u4v4 + u5*u5v4 + u6*u6v4 +
+      u7*u7v4 + u8*u8v4 + u9*u9v4 + u10*u10v4 + u11*u11v4 + u12*u12v4 + u13*u13v4
+    
+    demand_v5 <- u1*u1v5 + u2*u2v5 + u3*u3v5 + u4*u4v5 + u5*u5v5 + u6*u6v5 +
+      u7*u7v5 + u8*u8v5 + u9*u9v5 + u10*u10v5 + u11*u11v5 + u12*u12v5 + u13*u13v5
+    
+    demand_v6 <- u1*u1v6 + u2*u2v6 + u3*u3v6 + u4*u4v6 + u5*u5v6 + u6*u6v6 +
+      u7*u7v6 + u8*u8v6 + u9*u9v6 + u10*u10v6 + u11*u11v6 + u12*u12v6 + u13*u13v6
 
   } else if (scenario == 2) {
 
-    demand_v2 <- 100
+    u1 <- 71
+    u2 <- 13
+    u3 <- 12
+    u4 <- 15
+    u5 <- 35
+    u6 <- 14
+    u7 <- 57
+    u8 <- 4
+    u9 <- 7
+    u10 <- 22
+    u11 <- 4
+    u12 <- 16
+    u13 <- 25
+    
+    demand_v2 <- u1*u1v2 + u2*u2v2 + u3*u3v2 + u4*u4v2 + u5*u5v2 + u6*u6v2 +
+      u7*u7v2 + u8*u8v2 + u9*u9v2 + u10*u10v2 + u11*u11v2 + u12*u12v2 + u13*u13v2
+    
+    demand_v3 <- u1*u1v3 + u2*u2v3 + u3*u3v3 + u4*u4v3 + u5*u5v3 + u6*u6v3 +
+      u7*u7v3 + u8*u8v3 + u9*u9v3 + u10*u10v3 + u11*u11v3 + u12*u12v3 + u13*u13v3
+    
+    demand_v4 <- u1*u1v4 + u2*u2v4 + u3*u3v4 + u4*u4v4 + u5*u5v4 + u6*u6v4 +
+      u7*u7v4 + u8*u8v4 + u9*u9v4 + u10*u10v4 + u11*u11v4 + u12*u12v4 + u13*u13v4
+    
+    demand_v5 <- u1*u1v5 + u2*u2v5 + u3*u3v5 + u4*u4v5 + u5*u5v5 + u6*u6v5 +
+      u7*u7v5 + u8*u8v5 + u9*u9v5 + u10*u10v5 + u11*u11v5 + u12*u12v5 + u13*u13v5
+    
+    demand_v6 <- u1*u1v6 + u2*u2v6 + u3*u3v6 + u4*u4v6 + u5*u5v6 + u6*u6v6 +
+      u7*u7v6 + u8*u8v6 + u9*u9v6 + u10*u10v6 + u11*u11v6 + u12*u12v6 + u13*u13v6    
+
   } else {
-    demand_v2 <- 100
+    u1 <- 85
+    u2 <- 11
+    u3 <- 1
+    u4 <- 13
+    u5 <- 26
+    u6 <- 8
+    u7 <- 41
+    u8 <- 3
+    u9 <- 8
+    u10 <- 24
+    u11 <- 4
+    u12 <- 16
+    u13 <- 25
+    
+    demand_v2 <- u1*u1v2 + u2*u2v2 + u3*u3v2 + u4*u4v2 + u5*u5v2 + u6*u6v2 +
+      u7*u7v2 + u8*u8v2 + u9*u9v2 + u10*u10v2 + u11*u11v2 + u12*u12v2 + u13*u13v2
+    
+    demand_v3 <- u1*u1v3 + u2*u2v3 + u3*u3v3 + u4*u4v3 + u5*u5v3 + u6*u6v3 +
+      u7*u7v3 + u8*u8v3 + u9*u9v3 + u10*u10v3 + u11*u11v3 + u12*u12v3 + u13*u13v3
+    
+    demand_v4 <- u1*u1v4 + u2*u2v4 + u3*u3v4 + u4*u4v4 + u5*u5v4 + u6*u6v4 +
+      u7*u7v4 + u8*u8v4 + u9*u9v4 + u10*u10v4 + u11*u11v4 + u12*u12v4 + u13*u13v4
+    
+    demand_v5 <- u1*u1v5 + u2*u2v5 + u3*u3v5 + u4*u4v5 + u5*u5v5 + u6*u6v5 +
+      u7*u7v5 + u8*u8v5 + u9*u9v5 + u10*u10v5 + u11*u11v5 + u12*u12v5 + u13*u13v5
+    
+    demand_v6 <- u1*u1v6 + u2*u2v6 + u3*u3v6 + u4*u4v6 + u5*u5v6 + u6*u6v6 +
+      u7*u7v6 + u8*u8v6 + u9*u9v6 + u10*u10v6 + u11*u11v6 + u12*u12v6 + u13*u13v6
   }
   
-  # return(list("vehicle_v2" = demand_v2, "vehicle_v3" = demand_v3, "vehicle_v4" = demand_v4, "vehicle_v5" = demand_v5,
-  #             "vehicle_v6" = demand_v6))
-  return(list("vehicle_v2" = demand_v2))
+  return(list("vehicle_v2" = demand_v2, "vehicle_v3" = demand_v3, "vehicle_v4" = demand_v4, "vehicle_v5" = demand_v5,
+              "vehicle_v6" = demand_v6))
 }
 
 
