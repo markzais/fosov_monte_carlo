@@ -5,6 +5,8 @@ library(openxlsx)
 library(readxl)
 library(ggplot2)
 library(tidyverse)
+library(ggpubr)
+library("gridExtra")
 
 setwd("C:/Users/mark.zais/OneDrive - Integration Innovation/USSOCOM/FOSOV/Modeling/Vehicle_Usage/")
 path <- getwd()
@@ -51,42 +53,93 @@ crows_data <- rename(crows_data, Vehicle = 'Serial #')
 # plotMiles <- ggplot2:: ggplot(data = df)+aes(x=Unit.y,y= AnnualMiles) +geom_point()
 
 # # Plot the data (plot #2)
-# # Scatter plot of number of miles driven by vehicle for each unit 
+# # Scatter plot of number of miles driven by vehicle for each unit
 # ggplot(df, aes(x = Unit.y, y = AnnualMiles)) +
 #   geom_point() +
 #   labs(x = "Unit", y = "Annual Miles Driven") +
 #   ggtitle("Number of Miles Driven by Vehicle and Unit") +
-#   theme_minimal() 
+#   theme_minimal()
 
 # Plot the data (plot #3)
+
+# Dotplot of Miles per vehicle
+plot1 <- ggdotplot(mrap_data, x = "Unit.y", y = "AnnualMiles") + 
+  # geom_boxplot(outlier.shape = NA) +
+  labs(x = "Unit", y = "Annual Miles Driven",
+       sort.by.groups = TRUE,      # Sort inside each group
+       title = "MRAP Miles Driven per Vehicle by Unit",
+       subtitle = "April 2022 - April 2023") +
+  theme_minimal()
+
+plot2 <- ggdotplot(nscv_data, x = "Unit.y", y = "AnnualMiles") + 
+  labs(x = "Unit", y = "Annual Miles Driven",
+       title = "NSCV Kilometers Driven per Vehicle by Unit",
+       sort.by.groups = TRUE,      # Sort inside each group
+       subtitle = "April 2022 - April 2023") + 
+  theme_minimal()
+
+plot3 <- ggdotplot(mrzr_data, x = "Unit.y", y = "AnnualMiles") + 
+  labs(x = "Unit", y = "Annual Miles Driven",
+       sort.by.groups = TRUE,      # Sort inside each group
+       title = "MRZR Miles Driven per Vehicle by Unit",
+       subtitle = "April 2022 - April 2023") + 
+  theme_minimal()
+
+plot4 <- ggdotplot(crows_data, x = "UNIT.y", y = "AnnualHours") + 
+  labs(x = "Unit", y = "Annual Hours",
+       sort.by.groups = TRUE,      # Sort inside each group
+       title = "Crows Hours per System by Unit",
+       subtitle = "April 2022 - April 2023") + 
+  theme_minimal()
+
+ggarrange(plot1, plot2, plot3, plot4,
+          labels = c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2)
+
+
 # Boxplot of number of miles driven by vehicle for each unit
-ggplot(mrap_data, aes(x = Unit.y, y = AnnualMiles)) +
+plot1 <- ggplot(mrap_data, aes(x = Unit.y, y = AnnualMiles)) +
   geom_boxplot(outlier.shape = NA) +
   labs(x = "Unit", y = "Annual Miles Driven",
+       sort.by.groups = TRUE,      # Sort inside each group
   title = "MRAP Miles Driven per Vehicle by Unit",
   subtitle = "April 2022 - April 2023") + ylim(0, 5000) +
   theme_minimal()
 
-ggplot(nscv_data, aes(x = Unit.y, y = AnnualMiles)) +
+plot2 <- ggplot(nscv_data, aes(x = Unit.y, y = AnnualMiles)) +
   geom_boxplot(outlier.shape = NA) +
   labs(x = "Unit", y = "Annual Miles Driven",
        title = "NSCV Kilometers Driven per Vehicle by Unit",
+       sort.by.groups = TRUE,      # Sort inside each group
        subtitle = "April 2022 - April 2023") + ylim(0, 1000) +
   theme_minimal()
 
-ggplot(mrzr_data, aes(x = Unit.y, y = AnnualMiles)) +
+plot3 <- ggplot(mrzr_data, aes(x = Unit.y, y = AnnualMiles)) +
   geom_boxplot(outlier.shape = NA) +
   labs(x = "Unit", y = "Annual Miles Driven",
+       sort.by.groups = TRUE,      # Sort inside each group
        title = "MRZR Miles Driven per Vehicle by Unit",
        subtitle = "April 2022 - April 2023") + ylim(0, 6500) +
   theme_minimal()
 
-ggplot(crows_data, aes(x = UNIT.y, y = AnnualMiles)) +
+plot4 <- ggplot(crows_data, aes(x = UNIT.y, y = AnnualHours)) +
   geom_boxplot(outlier.shape = NA) +
   labs(x = "Unit", y = "Annual Miles Driven",
+       sort.by.groups = TRUE,      # Sort inside each group
        title = "Crows Hours per System by Unit",
        subtitle = "April 2022 - April 2023") +  ylim(0, 500) +
   theme_minimal()
+
+ggarrange(plot1, plot2, plot3, plot4,
+          labels = c("A", "B", "C", "D"),
+          ncol = 2, nrow = 2)
+
+
+
+
+
+grid.arrange(plot1, plot2, plot3, plot4 + rremove("x.text"),  
+         ncol = 2, nrow = 2)
 
 # Create multiple boxplots in one window
 MRAP_Miles <- mrap_data$AnnualMiles
@@ -98,5 +151,3 @@ boxplot(MRAP_Miles, horizontal=TRUE)
 boxplot(NSCV_Miles, horizontal=TRUE)
 boxplot(MRZR_Miles, horizontal=TRUE)
 boxplot(CROWS_Hours, horizontal=TRUE)
-
-
