@@ -36,12 +36,16 @@ crows2023<-read_excel("20230416 Miles and Hours.xlsx",
 # r merge by rownames
 mrap_data <- merge(mrap2022, mrap2023, by = 'Serial #')
 mrap_data$AnnualMiles <- (mrap_data$`Current Miles.y` - mrap_data$`Current Hours.x`)
+mrap_data["Unit.y"][mrap_data["Unit.y"] == 0] <- NA
 nscv_data <- merge(nscv2022, nscv2023, by = 'Serial #')
 nscv_data$AnnualMiles <- (nscv_data$`CurrentKilometers.y` - nscv_data$`CurrentKilometers.x`)
+nscv_data["Unit.y"][nscv_data["Unit.y"] == 0] <- NA
 mrzr_data <- merge(mrzr2022, mrzr2023, by = 'Serial #')
 mrzr_data$AnnualMiles <- (mrzr_data$`Current Miles.y` - mrzr_data$`Current Hours.x`)
+mrzr_data["Unit.y"][mrzr_data["Unit.y"] == 0] <- NA
 crows_data <- merge(crows2022, crows2023, by = 'Serial #')
 crows_data$AnnualHours <- (crows_data$`Current Hours.y` - crows_data$`Current Hours.x`)
+crows_data["UNIT.y"][crows_data["UNIT.y"] == 0] <- NA
 
 # Rename column header
 mrap_data <- rename(mrap_data, Vehicle = 'Serial #')
