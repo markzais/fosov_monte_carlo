@@ -35,14 +35,14 @@ crows2023<-read_excel("20230416 Miles and Hours.xlsx",
 # merge two data frames in r
 # r merge by rownames
 mrap_data <- merge(mrap2022, mrap2023, by = 'Serial #')
-mrap_data$AnnualMiles <- (mrap_data$`Current Miles.y` - mrap_data$`Current Hours.x`)
+mrap_data$AnnualMiles <- (mrap_data$`Current Miles.y` - mrap_data$`Current Miles.x`)
 mrap_data["Unit.y"][mrap_data["Unit.y"] == 0] <- NA
 nscv_data <- merge(nscv2022, nscv2023, by = 'Serial #')
 nscv_data$AnnualKilometers <- (nscv_data$`CurrentKilometers.y` - nscv_data$`CurrentKilometers.x`)
 nscv_data$AnnualMiles <- nscv_data$AnnualKilometers * 0.621371
 nscv_data["Unit.y"][nscv_data["Unit.y"] == 0] <- NA
 mrzr_data <- merge(mrzr2022, mrzr2023, by = 'Serial #')
-mrzr_data$AnnualMiles <- (mrzr_data$`Current Miles.y` - mrzr_data$`Current Hours.x`)
+mrzr_data$AnnualMiles <- (mrzr_data$`Current Miles.y` - mrzr_data$`Current Miles.x`)
 mrzr_data["Unit.y"][mrzr_data["Unit.y"] == 0] <- NA
 crows_data <- merge(crows2022, crows2023, by = 'Serial #')
 crows_data$AnnualHours <- (crows_data$`Current Hours.y` - crows_data$`Current Hours.x`)
@@ -54,6 +54,7 @@ nscv_data <- rename(nscv_data, Vehicle = 'Serial #')
 mrzr_data <- rename(mrzr_data, Vehicle = 'Serial #')
 crows_data <- rename(crows_data, Vehicle = 'Serial #')
 
+summary(crows_data$AnnualHours)
 # # Plot the data (plot #1)
 # plotMiles <- ggplot2:: ggplot(data = df)+aes(x=Unit.y,y= AnnualMiles) +geom_point()
 
@@ -108,7 +109,7 @@ plot1 <- ggplot(mrap_data, aes(x = Unit.y, y = AnnualMiles)) +
   labs(x = "Unit", y = "Annual Miles Driven",
        sort.by.groups = TRUE,      # Sort inside each group
   title = "MRAP Miles Driven per Vehicle by Unit",
-  subtitle = "April 2022 - April 2023") + ylim(0, 45000) +
+  subtitle = "April 2022 - April 2023") + ylim(0, 5000) +
   theme_minimal()
 
 plot2 <- ggplot(nscv_data, aes(x = Unit.y, y = AnnualMiles)) +
@@ -116,7 +117,7 @@ plot2 <- ggplot(nscv_data, aes(x = Unit.y, y = AnnualMiles)) +
   labs(x = "Unit", y = "Annual Miles Driven",
        title = "NSCV Miles Driven per Vehicle by Unit",
        sort.by.groups = TRUE,      # Sort inside each group
-       subtitle = "April 2022 - April 2023") + ylim(0, 10000) +
+       subtitle = "April 2022 - April 2023") + ylim(0, 5000) +
   theme_minimal()
 
 plot3 <- ggplot(mrzr_data, aes(x = Unit.y, y = AnnualMiles)) +
@@ -124,7 +125,7 @@ plot3 <- ggplot(mrzr_data, aes(x = Unit.y, y = AnnualMiles)) +
   labs(x = "Unit", y = "Annual Miles Driven",
        sort.by.groups = TRUE,      # Sort inside each group
        title = "MRZR Miles Driven per Vehicle by Unit",
-       subtitle = "April 2022 - April 2023") + ylim(0, 10000) +
+       subtitle = "April 2022 - April 2023") + ylim(0, 5000) +
   theme_minimal()
 
 plot4 <- ggplot(crows_data, aes(x = UNIT.y, y = AnnualHours)) +
