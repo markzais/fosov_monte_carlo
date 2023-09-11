@@ -24,7 +24,7 @@ generate_vehicle_demand <- function(seed) {
   # scenario <- sample(c(1, 2, 3), 1, prob = rep(1/3, 3))
   
   # Use this sample to adjust scenario probabilities for sensitivity analysis
-  scenario <- sample(c(1, 2, 3), 1, prob = c(1/3,1/3,1/3))
+  scenario <- sample(c(1, 2, 3), 1, prob = c(0.25,0.25,0.5))
 
   # Probability distributions for Unit i and Vehicle j
   # rtriangle(n, min, max, mode)
@@ -227,7 +227,7 @@ writeData(wb, sheet = "my_sheet", x = df, startRow = 1, startCol = 1)
 
 # save Excel file
 date <- Sys.Date()
-saveWorkbook(wb, paste0(date,"_monte_carlo_output.xlsx"), overwrite = TRUE)
+saveWorkbook(wb, paste0(date,"_monte_carlo_output_s3.xlsx"), overwrite = TRUE)
 # 
 # ggplot(data.frame(demand = demand_samples), aes(x = demand)) +
 #   stat_ecdf(geom = "step", color = "steelblue") +
